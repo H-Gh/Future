@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TimeSynchronizationRequest;
 use App\Services\MarsClock;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -14,11 +15,12 @@ use Illuminate\Http\JsonResponse;
 class TimeSynchronizationController extends Controller
 {
     /**
-     * @param         $timestamp
+     * @param                            $timestamp
+     * @param TimeSynchronizationRequest $request
      *
      * @return JsonResponse
      */
-    public function sync($timestamp): JsonResponse
+    public function sync($timestamp, TimeSynchronizationRequest $request): JsonResponse
     {
         $dateTime = Carbon::createFromTimestamp($timestamp);
         $marsClock = new MarsClock($dateTime);
